@@ -20,10 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="顺序表.cpp">
+    <ClCompile Include="顺序表.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
