@@ -88,6 +88,16 @@ void PrintList(SqList *L)
 	}
 }
 
+int LocateElem(SqList *L) {
+	char no[50];
+	printf("请输入要查找的ISBN号码：");
+	scanf("%s", no);
+	for (int i = 0; i < L->length; i++) {
+		if (&L->elem[i].no == no) {printf("ISBN为%s的图书在L中位于第%d位",no,i+1);}
+		printf("未找到ISBN为%s的图书", no);
+	}
+}
+
 void main() {
 	SqList L;
 	printf("顺序表初始化结果：");
@@ -95,4 +105,5 @@ void main() {
 	PrintList(&L);
 	CreatElement(&L);   //向L中填充数据
 	PrintList(&L);
+	LocateElem(&L);
 }
