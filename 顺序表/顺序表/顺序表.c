@@ -9,8 +9,8 @@ typedef int Status;
 
 //顺序表的顺序存储结构
 typedef struct { //图书信息定义
-	char no[3];
-	char name[5];
+	char no[50];
+	char name[100];
 }Book;
 
 typedef struct {
@@ -47,10 +47,11 @@ Status InitList(SqList *L) { //C语言中&表示的不是引用，而是取地�
 	return OK;
 }//初始化顺序表
 
+//插入
 Status CreatElement(SqList *L) {
 	int i;
-	char no[3];
-	char name[5];
+	char no[50];
+	char name[100];
 	printf("输入图书的ISBN号：");
 	scanf("%s", no);
 	printf("输入图书的名称:");
@@ -61,14 +62,13 @@ Status CreatElement(SqList *L) {
 	Book e;
 	strcpy(e.no, no);
 	strcpy(e.name, name);
-	Response(InsertList(&L, i, e));
+	Response(InsertList(L, i, e));
 }
 
-//插入
 Status InsertList(SqList *L, int i, ElemType e) {//声明一个结构体e，在L中的第i个位置插入e，i的范围为1 <= i <= L.length+1
 	if ((i < 1) || (i > L->length + 1)) { return ERROR; }
 	if (L->length == MAXSIZE) { return ERROR; }
-	int j;
+	int j=0;
 	for (j = L->length - 1; j >= i - 1; j--)
 	{
 		L->elem[j + 1] = L->elem[j];
@@ -76,16 +76,15 @@ Status InsertList(SqList *L, int i, ElemType e) {//声明一个结构体e，在L
 	L->elem[i - 1] = e;
 	++L->length;
 	return OK;
-}
+}//插入
 
-//输出顺序表L 中的元素
+//输出顺序表L中的元素
 void PrintList(SqList *L)
 {
 	int i;
 	for (i = 0; i < L->length; i++)
 	{
-		printf("%c\n", L->elem[i].no);
-		printf("%c\n", L->elem[i].no);
+		printf("no=%s,name=%s\n", L->elem[i].no,L->elem[i].name);
 	}
 }
 
@@ -95,6 +94,5 @@ void main() {
 	Response(InitList(&L)); //初始化顺序表并返回结果
 	PrintList(&L);
 	CreatElement(&L);   //向L中填充数据
-	printf("顺序表插入结果：");
 	PrintList(&L);
 }
