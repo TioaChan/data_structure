@@ -68,7 +68,7 @@ Status CreatElement(SqList *L) {
 Status InsertList(SqList *L, int i, ElemType e) {//声明一个结构体e，在L中的第i个位置插入e，i的范围为1 <= i <= L.length+1
 	if ((i < 1) || (i > L->length + 1)) { return ERROR; }
 	if (L->length == MAXSIZE) { return ERROR; }
-	int j=0;
+	int j = 0;
 	for (j = L->length - 1; j >= i - 1; j--)
 	{
 		L->elem[j + 1] = L->elem[j];
@@ -84,7 +84,7 @@ void PrintList(SqList *L)
 	int i;
 	for (i = 0; i < L->length; i++)
 	{
-		printf("no=%s,name=%s\n", L->elem[i].no,L->elem[i].name);
+		printf("no=%s,name=%s\n", L->elem[i].no, L->elem[i].name);
 	}
 }
 
@@ -93,17 +93,17 @@ int LocateElem(SqList *L) {
 	printf("请输入要查找的ISBN号码：");
 	scanf("%s", no);
 	for (int i = 0; i < L->length; i++) {
-		if (&L->elem[i].no == no) {printf("ISBN为%s的图书在L中位于第%d位",no,i+1);}
+		if (&L->elem[i].no == no) { printf("ISBN为%s的图书在L中位于第%d位", no, i + 1); }
 		printf("未找到ISBN为%s的图书", no);
 	}
 }
 
 void main() {
 	SqList L;
-	printf("顺序表初始化结果：");
+	printf("顺序表初始化 ");
 	Response(InitList(&L)); //初始化顺序表并返回结果
-	PrintList(&L);
+	PrintList(&L); //打印L
 	CreatElement(&L);   //向L中填充数据
 	PrintList(&L);
-	LocateElem(&L);
+	LocateElem(&L); //查找
 }
