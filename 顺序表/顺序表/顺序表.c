@@ -84,7 +84,7 @@ void PrintList(SqList *L)
 	int i;
 	for (i = 0; i < L->length; i++)
 	{
-		printf("no=%s,name=%s\n", L->elem[i].no, L->elem[i].name);
+		printf("%d.no=%s,name=%s\n",i+1, L->elem[i].no, L->elem[i].name);
 	}
 	menu(L);
 }
