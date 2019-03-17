@@ -100,19 +100,35 @@ int LocateElem(SqList *L) {
 	menu(L);
 }
 
+Status DeleteElem(SqList *L) {
+	printf("请输入要删除记录的序号：\n");
+	int i;
+	scanf("%d",&i);
+	if ((i < 1) || (i > L->length)) { return ERROR; }
+	for (int j = i; j <= L->length - 1; j++) {
+		L->elem[j - 1] = L->elem[j];
+	}
+	--L->length;
+	printf("success!\n");
+	menu(L);
+}
+
 int menu(SqList *L) {
+	printf("\n---------------------------------\n");
 	printf("输入序号进行选择：\n");
 	printf("1.打印顺序表L所有元素\n");
 	printf("2.向顺序表L中插入一条记录\n");
 	printf("3.输入ISBN对顺序表L现有记录进行查找\n");
-	printf("4.退出\n");
+	printf("4.删除一条记录\n");
+	printf("5.退出\n");
+	printf("---------------------------------\n");
 	int op = 0;
 	scanf("%d", &op);
 	switch (op) {
 	case 1:PrintList(L);break;
 	case 2:CreatElement(L); break;
 	case 3:LocateElem(L); break;
-	case 4:break;
+	case 4:DeleteElem(L); break;
 	default:menu(L); break;
 	}
 }
