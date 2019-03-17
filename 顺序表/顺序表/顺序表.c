@@ -129,6 +129,7 @@ int menu(SqList *L) {
 	case 2:CreatElement(L); break;
 	case 3:LocateElem(L); break;
 	case 4:DeleteElem(L); break;
+	case 5:exit(0);
 	default:menu(L); break;
 	}
 }
