@@ -15,12 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="顺序表.c">
+    <ClCompile Include="线性表_顺序表.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
