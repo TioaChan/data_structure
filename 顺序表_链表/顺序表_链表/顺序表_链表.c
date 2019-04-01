@@ -92,9 +92,6 @@ void ListInsert(LinkList L) {
 	return OK;
 }
 
-void getNobyData(LinkList L) {
-	printf("TODO\n");
-}
 //TODO::删除单链表L中第i 个结点，被删元素用参数e返回，删除成功，函数返回true,删除失败，函数返回false
 int DeleteElem(LinkList L) {
 	printf("删除哪一项的数据？\n");

@@ -50,17 +50,17 @@ int InitList(SqList *L) {//初始化顺序表 TODO::填充数据
 	}
 }
 
-int PrintList(SqList *L)
+void PrintList(SqList *L)
 {
+	printf("\n");
 	for (int i = 0; i < L->length; i++)
 	{
 		printf("No.%d  data is %d\n", i + 1, L->data[i]);
 	}
-	return OK;
 	menu(L);
 }
 
-int InsertList(SqList *L) { //向第i项插入一条数据
+void InsertList(SqList *L) { //向第i项插入一条数据
 	int i;
 	printf("\n要在第几项插入一条数据？\n");
 	scanf("%2d", &i);
@@ -73,18 +73,16 @@ int InsertList(SqList *L) { //向第i项插入一条数据
 	++L->length;
 	printf("\n插入");
 	Response(OK);
-	return OK;
 	menu(L);
 }
 
-int getDatabyNo(SqList *L) {
+void getDatabyNo(SqList *L) {
 	int no;
 	printf("\n输入第n项进行查找：\n");
 	scanf("%3d", &no);
 	if ((no < 0) || (no > L->length)) { return ERROR; }
 	else {
 		printf("%d", L->data[no - 1]);
-		return OK;
 	}
 	menu(L);
 }
@@ -96,18 +94,15 @@ int getNobyData(SqList *L) {
 	for (int i = 0; i < L->length; i++) {
 		if (data == L->data[i]) {
 			printf("the Data %d is No.%d", data, i+1);
-			return OK;
 		}
 		else{
 			printf("cannot find Data %d", data);
-			return ERROR;
 		}
 	}
-	return OK;
 	menu(L);
 }
 
-int DeleteElem(SqList *L) {
+void DeleteElem(SqList *L) {
 	int no;
 	printf("\n输入第n项进行删除：\n");
 	scanf("%3d", &no);
@@ -117,7 +112,6 @@ int DeleteElem(SqList *L) {
 	}
 	--L->length;
 	menu(L);
-	return OK;
 }
 
 int menu(SqList *L) {
