@@ -1,5 +1,5 @@
 ﻿#include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #define MAXSIZE 100    //顺序栈初始化时分配的存储空间长度
 
 typedef struct {
@@ -16,7 +16,7 @@ int getRandomNum() {//随机数
 
 //初始化顺序栈S
 void InitStack(SqStack *S){
-	S->base = (char *)malloc(MAXSIZE * sizeof(char));   //为S分配存储空间,也可以使用下面注释掉的语句
+	S->base = (char *)malloc(MAXSIZE * sizeof(int));   //为S分配存储空间,也可以使用下面注释掉的语句
 	//S.base =new char[MAXSIZE];
 	if (!S->base) exit(-1);
 	S->top = S->base;        //空栈时，s.top和s.base均指向栈底
@@ -49,8 +49,16 @@ void Pop(SqStack *S) {
 }
 
 //TODO::取顺序栈S的栈顶元素，用参数e返回取得的栈顶元素
+int GetTop(SqStack *S) {
+	if (S->top != S->base) {
+		return *(S->top - 1);
+	}
+}
 
 //TODO::求顺序栈S的长度
+int StackLength(SqStack *S) {
+	return (S->top) - (S->base);
+}
 
 //TODO::输出顺序栈S中的元素（从栈顶到栈顶的顺序输出
 void PrintStack(SqStack *S)
@@ -72,4 +80,6 @@ int main()
 	InitStack(&S);
 	Push(&S);
 	PrintStack(&S);
+	printf("\nTHE TOP ELEMENT IS %d",GetTop(&S));
+	printf("\nTHE Stack Length IS %d", StackLength(&S));
 }
