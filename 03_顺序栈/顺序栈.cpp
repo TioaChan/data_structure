@@ -1,20 +1,74 @@
-﻿// 顺序栈.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+﻿#include <iostream>
+#include <time.h>
+#include <windows.h>
 
-#include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+#define MAXSIZE 100
+typedef int Elemtype;
+
+typedef struct {
+	Elemtype data[MAXSIZE];
+	int top;
+}SqStack;
+
+int GetRandomNum() {
+	srand((unsigned int)time(NULL));//设置当前时间为种子
+	return rand() % 100 + 1;
 }
 
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
+void menu(SqStack& sl);
 
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
+void Push(SqStack& sl) {
+	printf("\n---------------------------------\n");
+	int i=0;
+	while (i <= 5) {
+		if (sl.top == MAXSIZE - 1) {
+			printf_s("sl is full\n");
+			break;
+		}
+		else
+		{
+			sl.top++;
+			sl.data[sl.top] = GetRandomNum();
+			printf_s("%d\n", sl.data[sl.top]);
+			i++;
+			Sleep(1000);
+		}
+	}
+	menu(sl);
+}
+
+void Pop(SqStack& sl) {
+	if (sl.top == -1) {
+		printf_s("sl is empty\n");
+	}
+	else
+	{
+		printf_s("%d\n", sl.data[sl.top]);
+		--sl.top;
+	}
+	menu(sl);
+}
+
+void menu(SqStack& sl) {
+	printf("\n---------------------------------\n");
+	printf("输入序号进行选择：\n");
+	printf("1.push\n");
+	printf("2.pop\n");
+	printf("3.退出\n");
+	printf("---------------------------------\n");
+	int op = 0;
+	scanf_s("%d", &op);
+	switch (op) {
+	case 1:Push(sl); break;
+	case 2:Pop(sl); break;
+	case 3:exit(0);
+	default:menu(sl); break;
+	}
+}
+
+int main() {
+	SqStack sl;
+	sl.top = -1;
+	menu(sl);
+}
