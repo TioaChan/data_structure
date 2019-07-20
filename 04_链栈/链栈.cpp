@@ -2,19 +2,124 @@
 //
 
 #include <iostream>
+#include <time.h>
+#include <windows.h>
+typedef int ElemType;
+
+typedef struct StackNode {
+	ElemType Data;
+	struct StackNode *next;
+}StackNode,*LinkStack;
+
+int GetRandomNum() {
+	srand((unsigned int)time(NULL));//设置当前时间为种子
+	return rand() % 100 + 1;
+}
+
+void menu(LinkStack& s);
+
+void InitStack(LinkStack &s) {
+	s=NULL;
+	printf_s("Init Stack success.\n");
+}
+
+void StackEmpty(LinkStack& s) {
+	if (s == NULL) {
+		printf_s("Stack is empty.\n");
+	}
+	else
+	{
+		printf_s("Stack is not empty.\n");
+	}
+	menu(s);
+}
+
+void GetTop(LinkStack& s,int& e) {
+	if (s == NULL) {
+		printf_s("Stack is empty.\n");
+	}
+	else
+	{
+		printf_s("the top element is %d\n",s->Data);
+	}
+	menu(s);
+}
+
+void Push(LinkStack &s) {
+	int i = 0;
+	printf_s("PUSHING..\n");
+	while (i <= 5)
+	{
+		StackNode *temp=new StackNode;
+		//LinkStack temp=new LinkStack;
+		//LinkStack temp;
+		temp->Data=GetRandomNum();
+		printf_s("%d\n", temp->Data);
+		temp->next=s;
+		s=temp;
+		i++; 
+		Sleep(1000);
+	}
+	printf_s("DONE!\n");
+	menu(s);
+}
+
+void Pop(LinkStack &s, int& e) {
+	if (s != NULL)
+	{
+		e=s->Data;
+		printf_s("%d\n",e);
+		LinkStack p=s;//临时保存栈顶元素的空间，准备释放
+		s=s->next;
+		delete p;
+	}
+	else
+	{
+		printf_s("stack is empty.\n");
+	}
+	menu(s);
+}
+
+void TraverseList(LinkStack& s) {
+	if (s != NULL)
+	{
+		printf_s("%d\n", s->Data);
+		TraverseList(s->next);
+	}
+	else
+	{
+		printf_s("stack is empty.\n");
+		menu(s);
+	}
+}
+
+void menu(LinkStack& s) {
+	int i = 0, e = 0;
+	printf("---------------------------------\n");
+	printf("输入序号进行选择：\n1.判空\n2.入栈\n3.出栈\n4.取栈顶元素\n5.递归遍历\n10.退出\n");
+	printf("---------------------------------\n");
+	int op = 0;
+	printf("请输入序号：");
+	scanf_s("%d", &op);
+	switch (op) {
+	case 1:StackEmpty(s);
+		break;
+	case 3:Pop(s, e);
+		break;
+	case 2:Push(s);
+		break;
+	case 4:GetTop(s, e);
+		break;
+	case 5:TraverseList(s);break;
+	case 10:exit(0);
+	default:menu(s); break;
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	LinkStack s;
+	InitStack(s);
+	menu(s);
+	return 0;
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
