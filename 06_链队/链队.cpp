@@ -1,20 +1,113 @@
-﻿// 链队.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+﻿#include <iostream>
+#include <time.h>
+#include<Windows.h>;
 
-#include <iostream>
+typedef int ElemType;
+typedef struct Qnode {
+	ElemType data;
+	struct Qnode *next;
+}Qnode,*QueuePtr;
+typedef struct LinkQueue {//front做删除操作 //rear做插入操作
+	QueuePtr front;
+	QueuePtr rear;
+}lq;
+
+int GetRandomNum() {
+	srand((unsigned int)time(NULL));//设置当前时间为种子
+	return rand() % 999 + 100;
+}
+
+void menu(LinkQueue& q);
+
+void InitQueue(LinkQueue& q){
+	q.front=q.rear=new Qnode;
+	if (!q.front) {
+		printf_s("Init qNode Failed,Try again...\n");
+		InitQueue(q);
+	}
+	else
+	{
+		printf_s("Init qNode Success.\n");
+	}
+}
+
+//void DestroyQueue(LinkQueue& q) {}
+//
+//void ClearQueue(LinkQueue& q) {}
+//
+//bool QueueEmpty(LinkQueue q) {}
+//
+//int QueueLength(LinkQueue  Q) {}
+//
+//bool GetHead(LinkQueue  Q, ElemType& e) {}
+//
+void EnQueue(LinkQueue& q) {
+	int i=0;
+	while(i<5){
+	Qnode* p = new Qnode;//为入队元素分配节点空间，用指针p指向
+	if (!p) {
+		EnQueue(q);
+	}
+	p->data=GetRandomNum();
+	p->next=NULL;
+	printf_s("%d\n",p->data);
+	q.rear->next=p;//将新节点插入到队尾
+	q.rear=p;//修改队尾指针为p
+	i++;
+	Sleep(1000);
+	}
+	menu(q);
+}
+
+void DeQueue(LinkQueue& q, ElemType& e) {//出队
+	if (q.front == q.rear) {//判空
+		printf_s("qnode is empty.\n");
+	}
+	else
+	{
+		Qnode *p=new Qnode;//声明新节点p
+		p=q.front->next;//队列的头节点地址赋给p（q只包含两个指针，一个指向队列头节点，一个指向队列尾节点）
+		e=p->data;
+		q.front->next=p->next;//修改头指针
+		if (q.rear == p) {//如果删的是尾节点
+			q.front=q.rear;//队尾指针指向头节点
+		}
+		delete(p);//删除p
+	}
+}
+//
+//void QueueTraverse(LinkQueue  Q) {}
+
+
+void menu(LinkQueue& q) {
+	printf("\n---------------------------------\n");
+	printf("输入序号进行选择：\n");
+	printf("1.销毁\n2.清空\n3.判空\n4.求长\n5.取对头元素\n6.入队\n7.出队\n8.遍历\n10.退出\n");
+	printf("---------------------------------\n");
+	int op = 0, data;
+	printf("输入序号：");
+	scanf_s("%d", &op);
+	switch (op) {
+	//case 1: DestroyQueue(q); break;
+	//case 2: ClearQueue(q); break;
+	//case 3: QueueEmpty(q); break;
+	//case 4: QueueLength(q); break;
+	//case 5: GetHead(q, data); printf("队头元素是：%d\n", data); menu(q); break;
+	case 6: EnQueue(q); break;
+	case 7: DeQueue(q, data); printf("%d\n", data); menu(q); break;
+	//case 8: QueueTraverse(q); break;
+	case 10:exit(0);
+	default:menu(q); break;
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	lq q;
+	InitQueue(q);
+	printf("正在初始化数据...\n");
+	EnQueue(q);
+	menu(q);
+	return 0;
 }
 
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
