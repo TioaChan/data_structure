@@ -37,10 +37,35 @@ void InitQueue(LinkQueue& q){
 //
 //bool QueueEmpty(LinkQueue q) {}
 //
-//int QueueLength(LinkQueue  Q) {}
-//
-//bool GetHead(LinkQueue  Q, ElemType& e) {}
-//
+void QueueLength(LinkQueue &q) {
+	int i=0;
+	Qnode* p = new Qnode;
+	p->next=q.front->next;
+	if (q.front != q.rear) {
+		while (p->next != q.rear)
+		{
+			p->next = p->next->next;
+			i++;
+		}
+		printf("qnode length is %d", i + 1);
+	}
+	else
+	{
+		printf_s("qnode is empty.\n");
+	}
+	menu(q);
+}
+
+void GetHead(LinkQueue &q, ElemType& e) {
+	if (q.front != q.rear) {
+		e=q.front->next->data;
+	}
+	else
+	{
+		printf_s("qnode is empty.\n");
+	}
+}
+
 void EnQueue(LinkQueue& q) {
 	int i=0;
 	while(i<5){
@@ -91,8 +116,8 @@ void menu(LinkQueue& q) {
 	//case 1: DestroyQueue(q); break;
 	//case 2: ClearQueue(q); break;
 	//case 3: QueueEmpty(q); break;
-	//case 4: QueueLength(q); break;
-	//case 5: GetHead(q, data); printf("队头元素是：%d\n", data); menu(q); break;
+	case 4: QueueLength(q); break;
+	case 5: GetHead(q, data); printf("队头元素是：%d\n", data); menu(q); break;
 	case 6: EnQueue(q); break;
 	case 7: DeQueue(q, data); printf("%d\n", data); menu(q); break;
 	//case 8: QueueTraverse(q); break;
