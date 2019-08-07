@@ -101,7 +101,26 @@ void DeQueue(LinkQueue& q, ElemType& e) {//出队
 	}
 }
 //
-//void QueueTraverse(LinkQueue  Q) {}
+void QueueTraverse(LinkQueue &q) {
+	//int i = 0;
+	Qnode* p = new Qnode;
+	p->next = q.front->next;
+	if (q.front != q.rear) {
+		while (p->next != q.rear)
+		{
+			printf_s("%d\n",p->next->data);
+			p->next = p->next->next;
+			//i++;
+		}
+		printf_s("%d\n", p->next->data);
+		//printf("qnode length is %d", i + 1);
+	}
+	else
+	{
+		printf_s("qnode is empty.\n");
+	}
+	menu(q);
+}
 
 
 void menu(LinkQueue& q) {
@@ -120,7 +139,7 @@ void menu(LinkQueue& q) {
 	case 5: GetHead(q, data); printf("队头元素是：%d\n", data); menu(q); break;
 	case 6: EnQueue(q); break;
 	case 7: DeQueue(q, data); printf("%d\n", data); menu(q); break;
-	//case 8: QueueTraverse(q); break;
+	case 8: QueueTraverse(q); break;
 	case 10:exit(0);
 	default:menu(q); break;
 	}
