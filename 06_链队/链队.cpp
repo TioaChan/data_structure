@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <time.h>
-#include<Windows.h>;
+#include<Windows.h>
 
 typedef int ElemType;
 typedef struct Qnode {
